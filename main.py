@@ -2,23 +2,30 @@ import os
 import PySimpleGUIQt as sg
 from PIL import Image
 
-# ファイルを変換する関数
-def convert_files(files, format,save_path):
-    #　入力されたファイルをforで回して処理
-    for file_p in files:
-        # 画像ファイルを開いて、指定されたフォーマットで保存する
-        if format == "JPEG":
-                # JPEGの場合は開き直してRGB形式に変換
-                im = Image.open(os.path.abspath(file_p)).convert("RGB")
-        file_p = file_p.removeprefix(r"file:///")
-        print(os.path.abspath(repr(file_p)))
-        
-        with Image.open(os.path.abspath(file_p)) as im:
-            # 画像のファイルネームを取得
-            file_p = os.path.splitext(os.path.basename(file_p))[0]
-            # 画像を保存する
-            im.save(os.path.abspath(os.path.join(save_path,f"{file_p}.{format.lower()}")), format=format,save_all=True)
-            sg.popup(f"{file_p} を {format} 形式に変換し、{save_path} に保存しました。")
+class ImageManager:
+    """画像を操作するクラス"""
+    #　コンストラクタ　初期値を""に設定
+    def __init__(self,file_path="",save_path=""):
+        self.file_path = file_path
+        self.save_path = save_path
+    # ファイルを変換する関数
+    def convert_files(self,files, format,save_path):
+        #　入力されたファイルをforで回して処理
+        for file_p in files:
+            # 画像ファイルを開いて、指定されたフォーマットで保存する
+            
+            file_p = file_p.removeprefix(r"file:///")
+            print(os.path.abspath(repr(file_p)))
+            
+            with Image.open(os.path.abspath(file_p)) as im:
+                if format == "JPEG":
+                    # JPEGの場合は開き直してRGB形式に変換
+                    im = Image.open(os.path.abspath(file_p)).convert("RGB")
+                # 画像のファイルネームを取得
+                file_p = os.path.splitext(os.path.basename(file_p))[0]
+                # 画像を保存する
+                im.save(os.path.abspath(os.path.join(save_path,f"{file_p}.{format.lower()}")), format=format,save_all=True)
+                sg.popup(f"{file_p} を {format} 形式に変換し、{save_path} に保存しました。")
 
 class GUIView:
     """GUIに関係するクラス"""
@@ -68,12 +75,12 @@ class GUIView:
             # 変換ボタンが押されたら
             if event == "-convert-":
                 # ファイルパスを取得
-                file_path = values["-file_path-"]
+                image_manager.file_path = values["-file_path-"]
                 # 改行でファイルパスを分けてリストで格納
-                file_path = file_path.splitlines()
+                image_manager.file_path = image_manager.file_path.splitlines()
                 
                 # 保存場所を取得
-                save_path = values["-save_path-"]
+                image_manager.save_path = values["-save_path-"]
                 format = ""  # 変換するファイル形式を格納する変数
 
                 # ラジオボタンから変換するファイル形式を取得
@@ -86,14 +93,16 @@ class GUIView:
                 elif values["-WEBP-"]:
                     format = "WEBP"
 
-                if file_path and format:  # ファイルパスとファイル形式が指定されている場合
+                if image_manager.file_path and format:  # ファイルパスとファイル形式が指定されている場合
                     try:
-                        convert_files(file_path,format,save_path)
+                        image_manager.convert_files(image_manager.file_path,format,image_manager.save_path)
                     except:
                         sg.popup("変換に失敗しました。")
         self.window.close()
 
 if __name__ == "__main__":
+    # イメージ処理用のクラスをインスタンス化
+    image_manager = ImageManager()
     # GUIをインスタンス化
     image_converter = GUIView()
     # main実行
