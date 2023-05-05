@@ -32,30 +32,35 @@ layout = [
 # ウィンドウを作成
 window = sg.Window("Image Converter", layout, size=(500, 200))
 
-# イベントループ
-while True:
-    event, values = window.read()  # イベントを取得
+def main():
+    # イベントループ
+    while True:
+        event, values = window.read()  # イベントを取得
 
-    # ウィンドウを閉じたら終了
-    if event == sg.WINDOW_CLOSED:
-        break
+        # ウィンドウを閉じたら終了
+        if event == sg.WINDOW_CLOSED:
+            break
 
-    # ファイルを選択したら、テキストボックスにパスを表示
-    if event == "-browse-":
-        window["-file_path-"].update(value=values["-browse-"])
+        # ファイルを選択したら、テキストボックスにパスを表示
+        if event == "-browse-":
+            window["-file_path-"].update(value=values["-browse-"])
 
-    # 変換ボタンが押されたら
-    if event == "-convert-":
-        pass
+        # 変換ボタンが押されたら
+        if event == "-convert-":
+            pass
 
-        # ラジオボタンから変換するファイル形式を取得
-        if values["-JPEG-"]:
-            format = "JPEG"
-        elif values["-PNG-"]:
-            format = "PNG"
-        elif values["-GIF-"]:
-            format = "GIF"
-        elif values["-WEBP-"]:
-            format = "WEBP"
+            # ラジオボタンから変換するファイル形式を取得
+            if values["-JPEG-"]:
+                format = "JPEG"
+            elif values["-PNG-"]:
+                format = "PNG"
+            elif values["-GIF-"]:
+                format = "GIF"
+            elif values["-WEBP-"]:
+                format = "WEBP"
 
-window.close()
+    window.close()
+
+if __name__ == "__main__":
+    # main実行
+    main()
