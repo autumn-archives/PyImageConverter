@@ -2,6 +2,21 @@ import os
 import PySimpleGUIQt as sg
 from PIL import Image
 
+# ファイルを変換する関数
+def convert_files(files, format,save_path):
+    #　入力されたファイルをforで回して処理
+    for file_p in files:
+        # 画像ファイルを開いて、指定されたフォーマットで保存する
+        
+        file_p = file_p.removeprefix(r"file:///")
+        print(os.path.abspath(repr(file_p)))
+        
+        with Image.open(os.path.abspath(file_p)) as im:
+            # 画像のファイルネームを取得
+            file_p = os.path.splitext(os.path.basename(file_p))[0]
+            # 画像を保存する
+            im.save(os.path.abspath(os.path.join(save_path,f"{file_p}.{format.lower()}")), format=format,save_all=True)
+            sg.popup(f"{file_p} を {format} 形式に変換し、{save_path} に保存しました。")
 
 # GUIのレイアウト
 layout = [
@@ -47,7 +62,14 @@ def main():
 
         # 変換ボタンが押されたら
         if event == "-convert-":
-            pass
+            # ファイルパスを取得
+            file_path = values["-file_path-"]
+            # 改行でファイルパスを分けてリストで格納
+            file_path = file_path.splitlines()
+            
+            # 保存場所を取得
+            save_path = values["-save_path-"]
+            format = ""  # 変換するファイル形式を格納する変数
 
             # ラジオボタンから変換するファイル形式を取得
             if values["-JPEG-"]:
@@ -58,6 +80,12 @@ def main():
                 format = "GIF"
             elif values["-WEBP-"]:
                 format = "WEBP"
+            
+            if file_path and format:  # ファイルパスとファイル形式が指定されている場合
+                try:
+                    convert_files(file_path,format,save_path)
+                except:
+                    sg.popup("変換に失敗しました。")
 
     window.close()
 
