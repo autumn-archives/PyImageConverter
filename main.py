@@ -15,7 +15,6 @@ class ImageManager:
             # 画像ファイルを開いて、指定されたフォーマットで保存する
             
             file_p = file_p.removeprefix(r"file:///")
-            print(os.path.abspath(repr(file_p)))
             
             with Image.open(os.path.abspath(file_p)) as im:
                 if format == "JPEG":
