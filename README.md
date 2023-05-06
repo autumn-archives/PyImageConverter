@@ -1,9 +1,9 @@
-# PyImageDownloader
+# PyImageConverter
 
-PyImageDownloaderは、PythonとPySimpleGUIを使用して作られた便利な画像ダウンローダーです。  
+PyImageConverterは、PythonとPySimpleGUIを使用して作られた便利な画像ダウンローダーです。    
 
 
-![PyImageDownloader](https://user-images.githubusercontent.com/124559210/236590781-a2266cd0-68dc-4dd6-be44-f6104e7d919d.jpg)
+![PyImageConverter](https://user-images.githubusercontent.com/124559210/236595026-78b17fe0-7bb4-43dc-beaa-8119f98a55ff.jpg)
 
 # 特徴
 画像をダウンロードできます。    
