@@ -1,9 +1,9 @@
-# PyImageConverter
+# PyImageExtractor
 
-PyImageConverterは、PythonとPySimpleGUIを使用して作られた便利な画像ダウンローダーです。    
+PyImageExtractorは、PythonとPySimpleGUIを使用して作られた便利な画像変換器です。    
 
 
-![PyImageConverter](https://user-images.githubusercontent.com/124559210/236595026-78b17fe0-7bb4-43dc-beaa-8119f98a55ff.jpg)
+![PyImageExtractor](https://user-images.githubusercontent.com/124559210/236595026-78b17fe0-7bb4-43dc-beaa-8119f98a55ff.jpg)
 
 # 特徴
 画像をダウンロードできます。    
@@ -22,10 +22,10 @@ pip install Pyllow
 
 
 # 使い方
-PyImageConverterを実行します。  
+PyImageExtractorを実行します。  
 ファイルパスの欄に変換したい画像をドラッグ＆ドロップするか、横の開くボタンから画像を開いてください。  
 保存するディレクトリを選んでください。  
-変換するファイル形式を選んでください。
+
 
 # クレジット
 PySimpleGUIQT  
