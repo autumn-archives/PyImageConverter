@@ -29,6 +29,6 @@ PyImageConverterを実行します。
 
 # クレジット
 PySimpleGUIQT  
-https://pypi.org/project/PySimpleGUIQt/
-Pillow
+https://pypi.org/project/PySimpleGUIQt/  
+Pillow  
 https://pypi.org/project/Pillow/  
