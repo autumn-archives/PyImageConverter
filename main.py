@@ -24,7 +24,10 @@ class ImageManager:
                 # 画像のファイルネームを取得
                 file_p = os.path.splitext(os.path.basename(file_p))[0]
                 # 画像を保存する
-                im.save(os.path.abspath(os.path.join(save_path,f"{file_p}.{format.lower()}")), format=format,save_all=True)
+                if format == "JPEG":
+                    im.save(os.path.abspath(os.path.join(save_path,f"{file_p}.{format.lower()}")), format=format)
+                else:
+                    im.save(os.path.abspath(os.path.join(save_path,f"{file_p}.{format.lower()}")), format=format,save_all=True)
                 sg.popup(f"{file_p} を {format} 形式に変換し、{save_path} に保存しました。")
 
 class GUIView:
